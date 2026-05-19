@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chinedu Desmond Nwadinobi — AI Engineer & Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+<!--
+  WHY THESE FONTS?
+  - Syne (headings): Geometric, bold, futuristic — used in tech brands. Makes a statement.
+  - Space Mono (accents/code): Monospace typeface that signals "developer" immediately.
+  Together they create the "technical creative" identity you want.
+-->
+
+<style>
+  /* ─── DESIGN TOKENS ─────────────────────────────────────────
+     WHY CSS VARIABLES? They let you change the whole site's
+     color scheme in one place. If you want a different accent
+     color tomorrow, change --accent and you're done.
+  ─────────────────────────────────────────────────────────── */
+  :root {
+    --bg-deep:      #080c10;
+    --bg-card:      #0d1117;
+    --bg-elevated:  #131920;
+    --border:       #1e2d3d;
+    --border-glow:  #00e5ff33;
+    --accent:       #00e5ff;
+    --accent-dim:   #00e5ff22;
+    --accent-mid:   #00b8cc;
+    --text-primary: #e8edf2;
+    --text-secondary: #8899aa;
+    --text-muted:   #445566;
+    --success:      #00ff9d;
+    --warning:      #ffb830;
+    --font-display: 'Syne', sans-serif;
+    --font-mono:    'Space Mono', monospace;
+    --transition:   0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* ─── RESET & BASE ─────────────────────────────────────────
+     WHY? Browsers have default styles that fight your design.
+     Reset removes them so you start clean.
+  ─────────────────────────────────────────────────────────── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg-deep);
+    color: var(--text-primary);
+    font-family: var(--font-display);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ─── NOISE TEXTURE OVERLAY ─────────────────────────────────
+     WHY? A subtle grain texture adds depth and makes the dark
+     background feel premium rather than flat black.
+  ─────────────────────────────────────────────────────────── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.4;
+  }
+
+  /* ─── GRID BACKGROUND ───────────────────────────────────────
+     WHY? The subtle grid gives a "technical / blueprint" feeling
+     that reinforces the AI/ML developer brand.
+  ─────────────────────────────────────────────────────────── */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(var(--border) 1px, transparent 1px),
+      linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size: 60px 60px;
+    opacity: 0.15;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ─── NAVIGATION ─────────────────────────────────────────── */
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(8, 12, 16, 0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    color: var(--accent);
+    letter-spacing: 0.05em;
+  }
+
+  .nav-logo span { color: var(--text-secondary); }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    text-decoration: none;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: color var(--transition);
+    position: relative;
+  }
+
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--accent);
+    transition: width var(--transition);
+  }
+
+  .nav-links a:hover { color: var(--accent); }
+  .nav-links a:hover::after { width: 100%; }
+
+  /* ─── MAIN LAYOUT ────────────────────────────────────────── */
+  main { position: relative; z-index: 1; }
+  section { padding: 5rem 2rem; max-width: 1100px; margin: 0 auto; }
+
+  /* ─── HERO SECTION ───────────────────────────────────────── */
+  #hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 6rem;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* WHY? The glowing orb creates a focal point and depth —
+     it's a modern design technique used by top-tier studios. */
+  .hero-glow {
+    position: absolute;
+    top: 20%;
+    right: -10%;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, #00e5ff15 0%, transparent 70%);
+    pointer-events: none;
+    border-radius: 50%;
+    filter: blur(40px);
+  }
+
+  .hero-tag {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--accent);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .hero-tag::before {
+    content: '';
+    width: 2rem;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  .hero-title {
+    font-size: clamp(3rem, 8vw, 6.5rem);
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    margin-bottom: 1.5rem;
+  }
+
+  /* WHY CLAMP()? It makes the font size responsive automatically —
+     no media queries needed. It scales between 3rem and 6.5rem
+     based on the viewport width. */
+
+  .hero-title .line-1 { color: var(--text-primary); display: block; }
+  .hero-title .line-2 {
+    color: transparent;
+    -webkit-text-stroke: 1px var(--accent);
+    display: block;
+  }
+
+  /* WHY TEXT STROKE? Outlined text is a sophisticated typographic
+     trick — it creates contrast and visual interest on dark bgs. */
+
+  .hero-desc {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    max-width: 560px;
+    margin-bottom: 3rem;
+    line-height: 1.8;
+    font-weight: 400;
+  }
+
+  .hero-desc strong { color: var(--text-primary); font-weight: 600; }
+
+  .hero-cta {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.9rem 2rem;
+    background: var(--accent);
+    color: #080c10;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: all var(--transition);
+    clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 0 100%);
+  }
+
+  /* WHY CLIP-PATH? That angled corner is a design signature —
+     it makes buttons look custom, not Bootstrap-default. */
+
+  .btn-primary:hover {
+    background: var(--accent-mid);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px var(--border-glow);
+  }
+
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.9rem 2rem;
+    background: transparent;
+    color: var(--accent);
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 1px solid var(--border);
+    cursor: pointer;
+    transition: all var(--transition);
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--accent);
+    background: var(--accent-dim);
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 3rem;
+    margin-top: 5rem;
+    padding-top: 3rem;
+    border-top: 1px solid var(--border);
+    flex-wrap: wrap;
+  }
+
+  .stat-item { display: flex; flex-direction: column; gap: 0.25rem; }
+  .stat-num {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--accent);
+    line-height: 1;
+    font-family: var(--font-mono);
+  }
+  .stat-label { font-size: 0.8rem; color: var(--text-secondary); letter-spacing: 0.05em; font-family: var(--font-mono); }
+
+  /* ─── SECTION LABELS ─────────────────────────────────────── */
+  .section-label {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--accent);
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .section-label::before {
+    content: '';
+    width: 1.5rem;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  .section-title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+  }
+
+  .section-sub {
+    color: var(--text-secondary);
+    max-width: 500px;
+    margin-bottom: 4rem;
+    line-height: 1.8;
+  }
+
+  /* ─── ABOUT SECTION ──────────────────────────────────────── */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .about-text p {
+    color: var(--text-secondary);
+    line-height: 1.9;
+    margin-bottom: 1rem;
+    font-weight: 400;
+  }
+
+  .about-text p strong { color: var(--accent); font-weight: 600; }
+
+  .about-terminal {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+    font-family: var(--font-mono);
+  }
+
+  .terminal-bar {
+    background: var(--bg-elevated);
+    padding: 0.75rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .dot { width: 10px; height: 10px; border-radius: 50%; }
+  .dot-r { background: #ff5f57; }
+  .dot-y { background: #febc2e; }
+  .dot-g { background: #28c840; }
+
+  .terminal-content { padding: 1.5rem; }
+  .terminal-line { font-size: 0.82rem; line-height: 2; }
+  .t-prompt { color: var(--accent); }
+  .t-cmd { color: var(--text-primary); }
+  .t-out { color: var(--text-secondary); }
+  .t-val { color: var(--success); }
+  .t-comment { color: var(--text-muted); }
+
+  /* WHY A TERMINAL UI? It signals "developer" instantly to
+     anyone reading your portfolio — recruiters, engineers, clients.
+     It's a smart contextual design choice, not just decoration. */
+
+  /* ─── SKILLS SECTION ─────────────────────────────────────── */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .skill-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    padding: 1.75rem;
+    transition: all var(--transition);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .skill-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 3px;
+    height: 0;
+    background: var(--accent);
+    transition: height var(--transition);
+  }
+
+  .skill-card:hover { border-color: var(--border-glow); transform: translateY(-4px); }
+  .skill-card:hover::before { height: 100%; }
+
+  .skill-icon {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .skill-name {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+  }
+
+  .skill-desc { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.7; font-weight: 400; }
+
+  .skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: 1rem;
+  }
+
+  .tag {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    padding: 0.2rem 0.6rem;
+    background: var(--accent-dim);
+    color: var(--accent);
+    border: 1px solid var(--border-glow);
+    letter-spacing: 0.05em;
+  }
+
+  /* ─── PROJECTS SECTION ───────────────────────────────────── */
+  .projects-grid {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .project-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    padding: 2rem;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 1.5rem;
+    align-start: start;
+    transition: all var(--transition);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .project-card.featured {
+    border-color: var(--accent);
+    background: linear-gradient(135deg, var(--bg-card) 0%, #00e5ff08 100%);
+  }
+
+  /* WHY A FEATURED CLASS? Your Face AI Tracker is your best
+     work — give it a visual hierarchy that makes it stand out. */
+
+  .project-card:hover { transform: translateY(-4px); box-shadow: 0 20px 60px rgba(0,229,255,0.05); }
+
+  .project-featured-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--accent);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+  }
+
+  .project-featured-badge span {
+    width: 6px; height: 6px; background: var(--accent);
+    border-radius: 50%; animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.8); }
+  }
+
+  .project-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+  }
+
+  .project-desc {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    line-height: 1.8;
+    margin-bottom: 1.25rem;
+    font-weight: 400;
+  }
+
+  .project-stack { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+
+  .project-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: flex-end;
+  }
+
+  .icon-btn {
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    font-size: 1.1rem;
+    transition: all var(--transition);
+    cursor: pointer;
+  }
+
+  .icon-btn:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-dim); }
+
+  /* ─── TIMELINE / LEARNING ────────────────────────────────── */
+  .timeline {
+    position: relative;
+    padding-left: 2rem;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--accent), transparent);
+  }
+
+  .timeline-item {
+    position: relative;
+    margin-bottom: 2.5rem;
+    padding-left: 1.5rem;
+  }
+
+  .timeline-dot {
+    position: absolute;
+    left: -2.5rem;
+    top: 0.3rem;
+    width: 10px;
+    height: 10px;
+    background: var(--accent);
+    border-radius: 50%;
+    box-shadow: 0 0 0 4px var(--bg-deep), 0 0 0 5px var(--accent);
+  }
+
+  .timeline-date {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    margin-bottom: 0.25rem;
+  }
+
+  .timeline-title { font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem; }
+  .timeline-desc { font-size: 0.875rem; color: var(--text-secondary); line-height: 1.7; font-weight: 400; }
+
+  /* ─── CONTACT SECTION ────────────────────────────────────── */
+  .contact-wrapper {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    padding: 4rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .contact-wrapper::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, #00e5ff08 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .contact-title {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    margin-bottom: 1rem;
+  }
+
+  .contact-sub {
+    color: var(--text-secondary);
+    font-size: 1rem;
+    max-width: 480px;
+    margin: 0 auto 2.5rem;
+    line-height: 1.8;
+    font-weight: 400;
+  }
+
+  .contact-links {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .contact-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.85rem 1.75rem;
+    border: 1px solid var(--border);
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    letter-spacing: 0.08em;
+    transition: all var(--transition);
+  }
+
+  .contact-link:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-dim); }
+  .contact-link.primary { border-color: var(--accent); color: var(--accent); }
+  .contact-link.primary:hover { background: var(--accent); color: #080c10; }
+
+  /* ─── FOOTER ─────────────────────────────────────────────── */
+  footer {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 2rem;
+    border-top: 1px solid var(--border);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    letter-spacing: 0.05em;
+  }
+
+  /* ─── SCROLL ANIMATIONS ──────────────────────────────────── */
+  /* WHY? Elements that fade in as you scroll feel polished and
+     modern — it's the difference between amateur and pro sites. */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ─── RESPONSIVE ─────────────────────────────────────────── */
+  /* WHY? Recruiters and clients view from phones too.
+     Your portfolio must look great on all screen sizes. */
+  @media (max-width: 768px) {
+    nav { padding: 1rem; }
+    .nav-links { display: none; }
+    .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .project-card { grid-template-columns: 1fr; }
+    .project-links { flex-direction: row; align-items: flex-start; }
+    .contact-wrapper { padding: 2rem 1.5rem; }
+    .hero-stats { gap: 2rem; }
+  }
+
+  /* ─── SCROLLBAR STYLING ──────────────────────────────────── */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--bg-deep); }
+  ::-webkit-scrollbar-thumb { background: var(--border); }
+  ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+</style>
+</head>
+<body>
+
+<!-- ─── NAVIGATION ──────────────────────────────────────────── -->
+<!-- WHY FIXED NAV? It follows the user as they scroll — making
+     it easy to jump between sections at any point. -->
+<nav>
+  <div class="nav-logo">
+    <span>// </span>dev_portfolio<span>.js</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#journey">Journey</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- ─── HERO ────────────────────────────────────────────────── -->
+<section id="hero">
+  <div class="hero-glow"></div>
+
+  <div class="hero-tag">Available for opportunities</div>
+
+  <h1 class="hero-title">
+    <span class="line-1">AI Engineer</span>
+    <span class="line-2">& Developer</span>
+  </h1>
+
+  <p class="hero-desc">
+    I build <strong>intelligent applications</strong> that bridge
+    computer vision, machine learning, and human experience.
+    Specializing in real-time AI systems and full-stack development.
+  </p>
+
+  <!-- UPDATE: Replace # with your actual LinkedIn and GitHub URLs -->
+  <div class="hero-cta">
+<a href="https://www.linkedin.com/in/chinedu-nwadinobi-21bbb240b/" target="_blank" rel="noopener noreferrer" class="contact-link primary">
+      &#x1F517; Connect on LinkedIn
+    </a>
+    <a href="#projects" class="btn-secondary">
+      &#x25B6; View Projects
+    </a>
+  </div>
+
+  <div class="hero-stats">
+    <div class="stat-item">
+      <span class="stat-num">5+</span>
+      <span class="stat-label">Apps Built</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">3</span>
+      <span class="stat-label">AI Integrations</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">∞</span>
+      <span class="stat-label">Still Learning</span>
+    </div>
+  </div>
+</section>
+
+<!-- ─── ABOUT ────────────────────────────────────────────────── -->
+<section id="about">
+  <div class="reveal">
+    <p class="section-label">01 — Who I Am</p>
+    <h2 class="section-title">Building the future,<br>one commit at a time.</h2>
+  </div>
+
+  <div class="about-grid reveal">
+    <div class="about-text">
+      <p>
+        I'm an aspiring <strong>AI Engineer and Software Developer</strong> based in Nigeria,
+        on a focused path toward building intelligent, real-world applications.
+        I started with the fundamentals — HTML, CSS, JavaScript — and I've been
+        pushing beyond my comfort zone ever since.
+      </p>
+      <p>
+        What sets me apart is that I <strong>don't just learn — I build</strong>.
+        A life countdown app, a banking app, and most recently a real-time
+        Face AI Tracker powered by TensorFlow.js and MediaPipe. I tackle
+        backend challenges even when I'm still mastering them.
+      </p>
+      <p>
+        I believe the best way to become a great engineer is to <strong>build things
+        that scare you a little</strong>. I'm doing exactly that — every day.
+      </p>
+    </div>
+
+    <!-- WHY A TERMINAL? It visually communicates "developer" without
+         saying a word. It's contextual design storytelling. -->
+    <div class="about-terminal">
+      <div class="terminal-bar">
+        <div class="dot dot-r"></div>
+        <div class="dot dot-y"></div>
+        <div class="dot dot-g"></div>
+        <span style="font-family:var(--font-mono);font-size:0.72rem;color:var(--text-muted);margin-left:0.5rem;">whoami.sh</span>
+      </div>
+      <div class="terminal-content">
+        <div class="terminal-line">
+          <span class="t-prompt">$ </span><span class="t-cmd">cat profile.json</span>
+        </div>
+        <div class="terminal-line" style="margin-top:0.5rem;">
+          <span class="t-out">{</span>
+        </div>
+        <div class="terminal-line" style="padding-left:1.25rem;">
+          <span class="t-comment">"name": </span><span class="t-val">"Chinedu Desmond Nwadinobi"</span><span class="t-out">,</span>
+        </div>
+        <div class="terminal-line" style="padding-left:1.25rem;">
+          <span class="t-comment">"role": </span><span class="t-val">"AI Engineer"</span><span class="t-out">,</span>
+        </div>
+        <div class="terminal-line" style="padding-left:1.25rem;">
+          <span class="t-comment">"location": </span><span class="t-val">"Nigeria ᴺᴳ"</span><span class="t-out">,</span>
+        </div>
+        <div class="terminal-line" style="padding-left:1.25rem;">
+          <span class="t-comment">"status": </span><span class="t-val">"building_and_learning"</span><span class="t-out">,</span>
+        </div>
+        <div class="terminal-line" style="padding-left:1.25rem;">
+          <span class="t-comment">"focus": </span><span class="t-val">"AI × Full Stack"</span><span class="t-out">,</span>
+        </div>
+        <div class="terminal-line" style="padding-left:1.25rem;">
+          <span class="t-comment">"available": </span><span class="t-val">true</span>
+        </div>
+        <div class="terminal-line"><span class="t-out">}</span></div>
+        <div class="terminal-line" style="margin-top:0.5rem;">
+          <span class="t-prompt">$ </span><span class="t-cmd">_</span>
+          <span style="animation: blink 1s step-end infinite; color: var(--accent);">|</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── SKILLS ────────────────────────────────────────────────── -->
+<section id="skills">
+  <div class="reveal">
+    <p class="section-label">02 — What I Work With</p>
+    <h2 class="section-title">Skills & Toolkit</h2>
+    <p class="section-sub">Technologies I've used to build real, deployed applications — not just followed tutorials.</p>
+  </div>
+
+  <div class="skills-grid">
+    <div class="skill-card reveal">
+      <div class="skill-icon">🤖</div>
+      <div class="skill-name">AI & Machine Learning</div>
+      <div class="skill-desc">Integrating real AI into real products — from conversational interfaces to computer vision systems.</div>
+      <div class="skill-tags">
+        <span class="tag">TensorFlow.js</span>
+        <span class="tag">MediaPipe</span>
+        <span class="tag">Llama 3.1</span>
+        <span class="tag">LLM APIs</span>
+      </div>
+    </div>
+
+    <div class="skill-card reveal">
+      <div class="skill-icon">⚡</div>
+      <div class="skill-name">Frontend Development</div>
+      <div class="skill-desc">Building interactive, responsive web apps with modern JavaScript and performance in mind.</div>
+      <div class="skill-tags">
+        <span class="tag">HTML5</span>
+        <span class="tag">CSS3</span>
+        <span class="tag">JavaScript</span>
+        <span class="tag">PWA</span>
+      </div>
+    </div>
+
+    <div class="skill-card reveal">
+      <div class="skill-icon">🔧</div>
+      <div class="skill-name">Backend & APIs</div>
+      <div class="skill-desc">Connecting the frontend to logic, databases, and external services through server-side code.</div>
+      <div class="skill-tags">
+        <span class="tag">Node.js</span>
+        <span class="tag">REST APIs</span>
+        <span class="tag">Express</span>
+      </div>
+    </div>
+
+    <div class="skill-card reveal">
+      <div class="skill-icon">👁️</div>
+      <div class="skill-name">Computer Vision</div>
+      <div class="skill-desc">Real-time facial analysis, emotion detection, eye tracking, and behavioral measurement.</div>
+      <div class="skill-tags">
+        <span class="tag">Face Detection</span>
+        <span class="tag">Emotion AI</span>
+        <span class="tag">Eye Tracking</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── PROJECTS ───────────────────────────────────────────────── -->
+<section id="projects">
+  <div class="reveal">
+    <p class="section-label">03 — What I've Built</p>
+    <h2 class="section-title">Projects</h2>
+    <p class="section-sub">Real applications built through months of learning, problem-solving, and iteration.</p>
+  </div>
+
+  <div class="projects-grid">
+
+    <!-- FEATURED PROJECT — Face AI Tracker -->
+    <div class="project-card featured reveal">
+      <div>
+        <div class="project-featured-badge">
+          <span></span> Featured Project
+        </div>
+        <h3 class="project-title">Face AI Tracker</h3>
+        <p class="project-desc">
+          Real-time behavioral analysis system using computer vision and machine learning.
+          Detects emotions, measures focus levels, tracks eye fatigue, and provides AI wellness
+          coaching through a conversational interface. Built as a Progressive Web App —
+          runs entirely in the browser with no installation needed.
+        </p>
+        <div class="project-stack">
+          <span class="tag">TensorFlow.js</span>
+          <span class="tag">MediaPipe</span>
+          <span class="tag">Node.js</span>
+          <span class="tag">Llama 3.1</span>
+          <span class="tag">PWA</span>
+          <span class="tag">Computer Vision</span>
+        </div>
+      </div>
+      <div class="project-links">
+        <!-- UPDATE: Replace # with your actual live link and GitHub link -->
+        <a href="#" target="_blank" class="icon-btn" title="Live Demo">↗</a>
+        <a href="#" target="_blank" class="icon-btn" title="GitHub">⌥</a>
+      </div>
+    </div>
+
+    <!-- Banking App -->
+    <div class="project-card reveal">
+      <div>
+        <h3 class="project-title">Banking Application</h3>
+        <p class="project-desc">
+          A full-stack banking interface with account management, transaction tracking,
+          and secure data handling. Tackled backend logic and database integration
+          while still learning — a major milestone project.
+        </p>
+        <div class="project-stack">
+          <span class="tag">JavaScript</span>
+          <span class="tag">Node.js</span>
+          <span class="tag">Backend</span>
+        </div>
+      </div>
+      <div class="project-links">
+        <a href="#" target="_blank" class="icon-btn" title="View Project">↗</a>
+      </div>
+    </div>
+
+    <!-- Life Countdown App -->
+    <div class="project-card reveal">
+      <div>
+        <h3 class="project-title">Life Countdown App</h3>
+        <p class="project-desc">
+          A mindfulness-focused productivity tool that visualizes time in a meaningful way —
+          turning an abstract concept into a personal motivator. Clean UI, smooth animations.
+        </p>
+        <div class="project-stack">
+          <span class="tag">HTML</span>
+          <span class="tag">CSS</span>
+          <span class="tag">JavaScript</span>
+        </div>
+      </div>
+      <div class="project-links">
+        <a href="#" target="_blank" class="icon-btn" title="View Project">↗</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ─── JOURNEY / TIMELINE ─────────────────────────────────────── -->
+<section id="journey">
+  <div class="reveal">
+    <p class="section-label">04 — How I Got Here</p>
+    <h2 class="section-title">The Journey</h2>
+    <p class="section-sub">Learning by building — the only way that actually works.</p>
+  </div>
+
+  <!-- WHY A TIMELINE? It shows growth over time. It turns "still
+       learning" from a weakness into a narrative of progress. -->
+  <div class="timeline">
+    <div class="timeline-item reveal">
+      <div class="timeline-dot"></div>
+      <div class="timeline-date">THE BEGINNING</div>
+      <h4 class="timeline-title">Foundations — HTML, CSS, JavaScript</h4>
+      <p class="timeline-desc">Started with the building blocks of the web. Learned not just the syntax but the thinking behind clean, structured code. Completed courses, built small projects, broke things, and fixed them.</p>
+    </div>
+
+    <div class="timeline-item reveal">
+      <div class="timeline-dot"></div>
+      <div class="timeline-date">FIRST REAL APPS</div>
+      <h4 class="timeline-title">Built Beyond My Level</h4>
+      <p class="timeline-desc">Launched a Life Countdown App and a Banking Application — both involving backend logic I hadn't formally studied yet. Learned that you grow fastest when you build things that challenge you.</p>
+    </div>
+
+    <div class="timeline-item reveal">
+      <div class="timeline-dot"></div>
+      <div class="timeline-date">AI INTEGRATION</div>
+      <h4 class="timeline-title">Discovering the AI Layer</h4>
+      <p class="timeline-desc">Started integrating AI APIs and models into applications. Realized that combining front-end skills with AI creates something genuinely powerful. This became my focus.</p>
+    </div>
+
+    <div class="timeline-item reveal">
+      <div class="timeline-dot"></div>
+      <div class="timeline-date">CURRENT — MONTHS IN PROGRESS</div>
+      <h4 class="timeline-title">Face AI Tracker — Flagship Project</h4>
+      <p class="timeline-desc">Building a real-time behavioral analysis system using TensorFlow.js, MediaPipe, and Llama 3.1. Emotion detection, focus measurement, eye fatigue tracking, and AI coaching — all in the browser. A PWA. This is the project that defines where I'm going.</p>
+    </div>
+
+    <div class="timeline-item reveal">
+      <div class="timeline-dot" style="background: transparent; border: 1px solid var(--accent);"></div>
+      <div class="timeline-date">NEXT</div>
+      <h4 class="timeline-title">What's Coming</h4>
+      <p class="timeline-desc">Deepening expertise in machine learning, expanding into more complex AI architectures, and continuing to build products that solve real problems. The path is clear — execution is everything.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CONTACT ────────────────────────────────────────────────── -->
+<section id="contact">
+  <div class="contact-wrapper reveal">
+    <p class="section-label" style="justify-content:center;">05 — Let's Work</p>
+    <h2 class="contact-title">Ready to build<br>something great.</h2>
+    <p class="contact-sub">
+      Open to collaborations, freelance projects, and opportunities
+      where I can apply AI and full-stack development. Let's connect.
+    </p>
+    <!-- UPDATE: Replace all # and placeholder email/links with your real ones -->
+    <div class="contact-links">
+<a href="https://www.linkedin.com/in/chinedu-nwadinobi-21bbb240b/" target="_blank" rel="noopener noreferrer" class="contact-link primary">
+    &#x1F517; LinkedIn Profile </a>  
+      <a href="https://github.com/Chisco-codes" target="_blank" class="contact-link">
+        &#x2395; GitHub
+      </a>
+      <a href="mailto:nwadinobichinedu999@gmail.com" class="contact-link">
+        &#x2709; Email Me
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ────────────────────────────────────────────────── -->
+<footer>
+  <!-- UPDATE: Put your name here -->
+  <p>Designed & Built by [Chinedu Desmond.N] — &copy; 2026</p>
+</footer>
+
+<script>
+  // ─── SCROLL REVEAL ANIMATION ─────────────────────────────────
+  // WHY? IntersectionObserver is the modern way to detect when
+  // elements enter the viewport. It's performant (no scroll events)
+  // and gives you the "elements fade in as you scroll" effect.
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // ─── STAGGERED CARD ANIMATION ─────────────────────────────────
+  // WHY? Cards animating in sequence (not all at once) looks
+  // intentional and polished — that's the professional touch.
+  document.querySelectorAll('.skill-card, .project-card, .timeline-item').forEach((el, i) => {
+    el.style.transitionDelay = `${i * 80}ms`;
+  });
+
+  // ─── ACTIVE NAV LINK ──────────────────────────────────────────
+  // WHY? Highlights which section you're currently in, giving
+  // users a sense of location on the page.
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(sec => {
+      if (window.scrollY >= sec.offsetTop - 200) current = sec.id;
+    });
+    navLinks.forEach(link => {
+      link.style.color = link.getAttribute('href') === `#${current}`
+        ? 'var(--accent)'
+        : 'var(--text-secondary)';
+    });
+  });
+</script>
+
+</body>
+</html>
